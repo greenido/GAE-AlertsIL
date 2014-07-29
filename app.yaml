@@ -1,0 +1,36 @@
+application: alerts-il
+version: 1
+runtime: php
+api_version: 1
+
+handlers:
+- url: /stylesheets
+  static_dir: css
+- url: /css
+  static_dir: css
+
+- url: /js
+  static_dir: js
+- url: /js/vendor/
+  static_dir: js/vendor
+- url: /js/foundation/
+  static_dir: js/foundation
+
+- url: /img
+  static_dir: img
+- url: /images
+  static_dir: img
+
+- url: /favicon.ico
+  script: favicon.ico
+
+- url: /humans.txt
+  script: humans.txt
+- url: /robots.txt
+  script: robots.txt
+
+- url: /proxy.php
+  script: proxy.php
+
+- url: /
+  script: index.html

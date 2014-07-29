@@ -1,0 +1,167 @@
+<!doctype html>
+<html class="no-js" lang="he" dir="rtl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="author" content="Ido Green | greenido.wordpress.com | @greenido">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alerts IL</title>
+    <link rel="stylesheet" href="css/foundation.css" />
+    <style>
+      li.tab-title {
+        width: 10em;
+      }
+
+      span.smallfont {
+        font-size: 80%;
+        padding: 0.4em;
+        border-radius: 30%;
+      }
+
+      span#clock {
+        padding-right: 1em;
+        padding-left: 1em;
+        background: rgba(144, 238, 144, 0.33);
+        border-radius: 20%;
+      }
+      .alerts-explanation {
+        font-size: 0.7rem;
+      }
+    </style>
+
+    <script src="js/vendor/modernizr.js"></script>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
+  </head>
+  <body>
+    <div class="fixed contain-to-grid">
+      <nav class="top-bar" data-topbar data-options="sticky_on: large">
+      
+
+        <ul class="title-area">
+          <li class="name">
+            <h1><a href="#">Alerts IL | התראות ומבזקים בישראל</a>
+            </h1>
+          </li>
+        </ul>
+
+      </nav>
+    </div>
+
+    <div class="off-canvas-wrap" data-offcanvas>
+      <div class="inner-wrap">
+
+        <div class="row">
+          <div class="large-12 columns">
+            <a class="right-off-canvas-toggle button" href="#" ><img src="">תפריט</a>
+            <a class="button" href="#" data-reveal-id="help" title="עזרה">עזרה</a>
+              <div id="help" class="reveal-modal" data-reveal>
+                <h2>מה זה?</h2>
+                <p class="lead">זוהי אפליקציה שמרכזת את כל אזעקות צבע אדום והמבזקים למקום אחד.<br></p>
+                <p>העדכון נעשה אוטומטית. אפשר לפתוח אותה בכל מכשיר נייד.<br> במצב של אזעקה, צבע אדום בולט יופיע על כל המסך עם פירוט המקומות.<br>
+                  <br>
+                  <a href="https://twitter.com/greenido" title="להערות והצעות" target="_blank"> נבנה על ידי greenido@</a>
+                </p>
+                <a class="close-reveal-modal">&#215;</a>
+              </div>
+          </div>
+        </div>
+
+        <!-- Off Canvas Menu -->
+        <aside class="right-off-canvas-menu">
+          <div class="row">
+            <div class="large-12 columns">
+              <ul class="tabs" data-tab>
+                <li class="tab-title active"><a href="#panel2-1">חדשות</a></li>
+                <li class="tab-title"><a href="#panel2-5">צבע אדום</a></li> 
+                <li class="tab-title"><a href="#panel2-2">טוויטר</a></li>
+                <li class="tab-title"><a href="#panel2-3">ערוץ 10</a></li>
+                <li class="tab-title"><a href="#panel2-4">ynet</a></li>
+              </ul>
+            </div>
+          </div>
+        </aside>
+
+    <div class="tabs-content">
+      <div class="content active" id="panel2-1">
+        <div class="row">
+          <div class="large-12 columns">
+              <p><strong>כל המבזקים מרחבי הרשת. המידע מתעדכן אוטומטית.</strong>
+                <span id="clock"></span>
+              </p>
+              <div class="large-12 columns callout panel" id="mainlist"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content" id="panel2-2">
+        <div class="row">
+          <div class="large-12 columns callout panel">
+
+              <a class="twitter-timeline" href="https://twitter.com/greenido/lists/zalerts-il" data-widget-id="490783453143511041">Tweets from https://twitter.com/greenido/lists/zalerts-il</a>
+              <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+
+          </div>
+        </div>
+      </div>
+     
+     <div class="content" id="panel2-3">
+        <div class="row">
+          <div class="large-12 columns">
+              <div class="large-12 columns callout panel" id="c10"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="content" id="panel2-4">
+        <div class="row">
+          <div class="large-12 columns">
+              <div class="large-12 columns callout panel" id="c-ynet"></div>
+          </div>
+        </div>
+      </div>
+
+     <div class="content" id="panel2-5">
+        <div class="row">
+          <div class="large-12 columns">
+            <h4>אזעקות אחרונות
+            </h4>
+              <div class="large-12 columns callout panel" id="realtime-alerts"></div>
+              <p class="alerts-explanation">אזעקות צבע אדום בזמן אמת - מתעדכן אוטומטית</p>
+          </div>
+        </div>
+      </div>
+      
+    </div>
+
+      <div id="alert-dialog" class="reveal-modal" data-reveal>
+        <h2>אזעקת צבע אדום</h2>
+        <div id="alerts-now"></div>
+        
+        <a class="close-reveal-modal">&#215;</a>
+      </div>
+
+    <hr />
+    
+    <!-- close the off-canvas menu -->
+      <a class="exit-off-canvas"></a>
+      </div>
+    </div>
+
+    <!-- External libs -->
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/foundation/foundation.topbar.js"></script>
+    
+    <script src="js/main.js"></script>  
+    <script src="js/alerts.js"></script>    
+    
+     <script>
+      var _gaq=[['_setAccount','UA-27750723-1'],['_trackPageview']];
+       (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+       g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
+       s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+
+  </body>
+</html>
