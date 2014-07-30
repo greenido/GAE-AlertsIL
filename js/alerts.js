@@ -55,11 +55,6 @@ function fetchPikodAlerts(){
       if (i.time > lastAlertTime) {
         // we have a new alert!
         gotNewData = true;
-        $('body').css('background-color', 'red');
-        $('#alerts-now').html( "<h3>" + i.area_name + ' - ' + unixTimeToReadable(i.time) +"</h3>");
-        $('#alert-dialog').foundation('reveal', 'open');
-        
-        setTimeout(returnToNormal, 3000);
       }
       localStorage.setItem("last_alert", i.time);
       first = false;
@@ -67,6 +62,12 @@ function fetchPikodAlerts(){
     items.push('<li id="' + i.alert_id + '">' + i.area_name + ' - ' + unixTimeToReadable(i.time) + '</li>');
   });
 
+  if (gotNewData) {
+    $('body').css('background-color', 'red');
+    $('#alerts-now').html( "<h3>" + items.join('') + "</h3>");
+    $('#alert-dialog').foundation('reveal', 'open');
+    setTimeout(returnToNormal, 3000);
+  }
   // Let's see if it's time to update the tab of the alerts
   if (gotNewData || $("#realtime-alerts").html().length < 10) {
     $('<ul/>', {
