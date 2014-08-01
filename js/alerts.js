@@ -21,7 +21,7 @@ function unixTimeToReadable(unix_timestamp) {
   }
   
   var year = date.getFullYear();
-  var month = date.getMonth();
+  var month = date.getMonth() +1;
   var day = date.getDate();
   // will display time in 10:30:23 format
   var formattedTime =  "(" + day + "/" + month + "/" + year + ") " + hours + ':' + minutes + ':' + seconds;
