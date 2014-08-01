@@ -7,6 +7,8 @@ It's a mobile first web app.
 
 Live version: http://alerts-il.appspot.com/
 
+![](http://greenido.files.wordpress.com/2014/07/screenshot-2014-07-09-16-28-35.png?w=247&h=300)
+
 Main Goal
 =========
 To built a mobile web app that give the user all the relevant information on EVERY mobile device.
