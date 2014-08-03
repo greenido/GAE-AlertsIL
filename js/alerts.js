@@ -130,6 +130,7 @@ $(function() {
         // If the user said okay
         if (status === "granted") {
           var n = new Notification("צבע אדים", "זוהי רק דוגמא להתראה");
+           $("#accept-notification").hide();
         }
         
       });
