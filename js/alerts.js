@@ -72,7 +72,7 @@ function fetchPikodAlerts(){
       var regex = /(<([^>]+)>)/ig
       var body = items.join(' \n ');
       var textResult = body.replace(regex, "");
-      console.log("text: "+ textResult);
+      //console.log("text: "+ textResult);
       var adomNotification = new Notification('צבע אדום', {
         body:  textResult,
         icon: "/img/alert.jpeg"
@@ -117,7 +117,7 @@ $(function() {
   $("#accept-notification").click(function() {
     // If the user agreed to get notified
     if (window.Notification && Notification.permission === "granted") {
-      var n = new Notification("צבע אדים", "זוהי רק דוגמא להתראה");
+      var n = new Notification("זוהי רק דוגמא להתראה");
       $("#accept-notification").hide();
     }
     // If the user hasn't told if he wants to be notified or not
@@ -129,7 +129,7 @@ $(function() {
 
         // If the user said okay
         if (status === "granted") {
-          var n = new Notification("צבע אדים", "זוהי רק דוגמא להתראה");
+          var n = new Notification( "זוהי רק דוגמא להתראה");
            $("#accept-notification").hide();
         }
         
