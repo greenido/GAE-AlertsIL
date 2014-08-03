@@ -110,35 +110,51 @@ $(function() {
     });
   } 
   else {
-    $("#accept-notification").hide();
+    //accept-notification
+    $("#accept-notification").attr('checked','checked');
   } 
 
   // Ask for permission to push notifications
   $("#accept-notification").click(function() {
     // If the user agreed to get notified
     if (window.Notification && Notification.permission === "granted") {
-      var n = new Notification("צבע אדים", "זוהי רק דוגמא להתראה");
-      $("#accept-notification").hide();
+      if ($("#accept-notification").attr('checked') !== 'checked') {
+        console.log("We setting notifications to ON");
+        var n = new Notification( "זוהי רק דוגמא להתראה של בצע אדום");  
+      }
+      else {
+        console.log("We setting notifications to off");
+        requestForNotificationPermission();  
+      }
     }
     // If the user hasn't told if he wants to be notified or not
     else if (window.Notification && Notification.permission !== "denied") {
-      Notification.requestPermission(function (status) {
-        if (Notification.permission !== status) {
-          Notification.permission = status;
-        }
-
-        // If the user said okay
-        if (status === "granted") {
-          var n = new Notification("צבע אדים", "זוהי רק דוגמא להתראה");
-           $("#accept-notification").hide();
-        }
-        
-      });
+      requestForNotificationPermission();
     }
 
 
   });
 
 });
+
+function requestForNotificationPermission() {
+  Notification.requestPermission(function (status) {
+    if (Notification.permission !== status) {
+      Notification.permission = status;
+    }
+
+    // If the user said okay
+    if (status === "granted") {
+      var n = new Notification("זוהי רק דוגמא להתראה של בצע אדום");
+       $("#accept-notification").attr("checked", "checked");
+    }
+    else {
+      console.log("We setting notifications to OFF");
+      Notification.permission = "denied";
+      $("#accept-notification").attr("checked", "false");
+    }
+    
+  });
+}
             
 
