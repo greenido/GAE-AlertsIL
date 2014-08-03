@@ -67,6 +67,22 @@ function fetchPikodAlerts(){
     $('#alerts-now').html( "<h3>" + items.join('') + "</h3>");
     $('#alert-dialog').foundation('reveal', 'open');
     setTimeout(returnToNormal, 3000);
+    // Check if we can use the web API for notifications
+    if ('Notification' in window) {
+      var regex = /(<([^>]+)>)/ig
+      var body = items.join(' \n ');
+      var textResult = body.replace(regex, "");
+      console.log("text: "+ textResult);
+      var adomNotification = new Notification('צבע אדום', {
+        body:  textResult,
+        icon: "/img/alert.jpeg"
+      });
+      // Should we close it automatically? not clear from UX point of view.
+      // adomNotification.onshow = function () { 
+      //   setTimeout(adomNotification.close(), 5000); 
+      // } 
+    }
+
   }
   // Let's see if it's time to update the tab of the alerts
   if (gotNewData || $("#realtime-alerts").html().length < 10) {
@@ -83,6 +99,45 @@ function fetchPikodAlerts(){
 
 setInterval(fetchPikodAlerts, 2000);
 
-// old stuff: <iframe src="http://www.tzevaadom.com/" style="border: 0; width: 100%; height: 600px"><p>Your browser does not support iframes.</p></iframe>
+// On load of our app - let's check for permissions on Web Notifications
+$(function() {
+   // At first, let's check if we have permission for notification
+  if (window.Notification && Notification.permission !== "granted") {
+    Notification.requestPermission(function (status) {
+      if (Notification.permission !== status) {
+          Notification.permission = status;
+      }
+    });
+  } 
+  else {
+    $("#accept-notification").hide();
+  } 
+
+  // Ask for permission to push notifications
+  $("#accept-notification").click(function() {
+    // If the user agreed to get notified
+    if (window.Notification && Notification.permission === "granted") {
+      var n = new Notification("צבע אדים", "זוהי רק דוגמא להתראה");
+      $("#accept-notification").hide();
+    }
+    // If the user hasn't told if he wants to be notified or not
+    else if (window.Notification && Notification.permission !== "denied") {
+      Notification.requestPermission(function (status) {
+        if (Notification.permission !== status) {
+          Notification.permission = status;
+        }
+
+        // If the user said okay
+        if (status === "granted") {
+          var n = new Notification("צבע אדים", "זוהי רק דוגמא להתראה");
+        }
+        
+      });
+    }
+
+
+  });
+
+});
             
 

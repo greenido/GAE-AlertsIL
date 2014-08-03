@@ -19,7 +19,7 @@ timeAgo = function(dateString) {
       dateString = dateString.trim();
     }
     catch(e) {
-      console.log("WARN: didnot find , in date: "+dateString);
+      console.log("WARN: didn't find a date in string: "+dateString);
     }
     
     
