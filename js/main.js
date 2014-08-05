@@ -127,6 +127,9 @@ function fetchFeed(curFeed, curSource) {
       if (curSource.indexOf("Ynet") > -1) {
         $('#c-ynet').html(mainList);
       }
+      if (curSource.indexOf("2") > -1) {
+        $('#c-mako').html(mainList);
+      }
     }
   }
 });
@@ -149,6 +152,9 @@ function fetchAllFeeds() {
 
   var YNET = 'http://www.ynet.co.il/Integration/StoryRss1854.xml';
   fetchFeed(YNET, "Ynet");
+
+  var MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
+  fetchFeed(MAKO, "ערןץ 2");
 }
 
 // First fetch of all the feeds to the page
