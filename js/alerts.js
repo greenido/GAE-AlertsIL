@@ -97,7 +97,8 @@ function fetchPikodAlerts(){
    
 }
 
-setInterval(fetchPikodAlerts, 2000);
+// Every 10sec
+setInterval(fetchPikodAlerts, 10000);
 
 // On load of our app - let's check for permissions on Web Notifications
 $(function() {
