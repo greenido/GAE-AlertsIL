@@ -96,23 +96,14 @@ function fetchFeed(curFeed, curSource) {
         }
         when += " (" + curSource + ")";
         // console.log("-----------" + when + "-------------");
-        // console.log("title      : " + entry.title);
         var buttonHTML = '<div class="row">' + 
           '<div class="large-8 columns">' + entry.title + '</div>' +
           '<div class="small-8 small-centered columns round secondary"><span class="smallfont">' + when +
           '</span></div></div>';
-          
-        // if ((curIndex % 2) === 0) {
-        //   mainList += '<div class="row">'; 
-        // }
         
-        mainList +=  '<div class="large-10 columns"><a href="' + 
+        mainList +=  '<div class="large-4 medium-4 small-8 columns"><a href="' + 
                       entry.link + '" target="_blank" class="medium round button">' + 
                       buttonHTML + '</a></div>';
-        // if (curIndex %2 === 0) {
-        //   mainList += "</div>";  
-        // }
-
         curIndex++;
       });
 
