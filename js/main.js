@@ -123,7 +123,6 @@ function fetchFeed(curFeed, curSource) {
   success  : function (data) {
     // check if we got something to work on.
     if (data && data.responseData.feed && data.responseData.feed.entries) {
-      
       //console.log("===== " + curFeed + " ====");
       var curIndex = 1;
       var mainList = '';
@@ -136,13 +135,12 @@ function fetchFeed(curFeed, curSource) {
           }
         }
         when += " (" + curSource + ")";
-        // console.log("-----------" + when + "-------------");
+        // console.log("-*-" + when + "-*-");
         
         var buttonHTML = '<div class="row">' + 
-          '<div class="large-8 columns">' + entry.title + '</div>' +
+          '<div class="large-8 columns smallfont">' + entry.title + '</div>' +
           '<div class="small-8 small-centered columns round secondary"><span class="smallfont">' + when +
           '</span></div></div>';
-        
         mainList +=  '<div class="large-4 medium-4 small-8 columns"><a href="' + 
                       entry.link + '" target="_blank" class="medium round button">' + 
                       buttonHTML + '</a></div>';
