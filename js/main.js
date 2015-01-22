@@ -173,11 +173,6 @@ function fetchFeed(curFeed, curSource) {
 function fetchAllFeeds() {
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
   $('#mainlist10').html("<p><img src='img/ajax-loader.gif' /></p>");
-  var WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
-  fetchFeed(WALLA, "Walla");
-  
-  var GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
-  fetchFeed(GLZ, "Glz");
   
   var C10TV = "http://rss.nana10.co.il/?s=126";
   fetchFeed(C10TV, "ערוץ 10");
@@ -187,6 +182,12 @@ function fetchAllFeeds() {
 
   var MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
   fetchFeed(MAKO, "ערןץ 2");
+  
+  var WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
+  fetchFeed(WALLA, "Walla");
+  
+  var GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
+  fetchFeed(GLZ, "Glz");
 }
 
 // First fetch of all the feeds to the page
