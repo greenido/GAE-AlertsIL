@@ -137,12 +137,13 @@ function fetchFeed(curFeed, curSource) {
         when += " (" + curSource + ")";
         // console.log("-*-" + when + "-*-");
         
-        var buttonHTML = '<div class="row">' + 
-          '<div class="large-8 columns smallfont">' + entry.title + '</div>' +
-          '<div class="small-8 small-centered columns round secondary"><span class="smallfont">' + when +
-          '</span></div></div>';
-        mainList +=  '<div class="large-4 medium-4 small-8 columns"><a href="' + 
-                      entry.link + '" target="_blank" class="medium round button">' + 
+        var buttonHTML = //'<div class="row">' + 
+          '<span class="tinytitle">' + entry.title + '</span><br>' +
+          //'<div class="small-8 small-centered columns round secondary">'
+          '<span class="smallfont">' + when +
+          '</span>'; //</div>';
+        mainList +=  '<div class="large-4 medium-4 small-8 columns ourbut"><a href="' + 
+                      entry.link + '" target="_blank" class="button round">' + 
                       buttonHTML + '</a></div>';
         curIndex++;
       });
