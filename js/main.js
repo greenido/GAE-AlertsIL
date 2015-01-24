@@ -10,6 +10,40 @@
 $(document).foundation();
 
 //
+// little clock
+//
+function updateClock() {
+  // Gets the current time
+  var now = new Date();
+
+  // Get the hours, minutes and seconds from the current time
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+
+  // Format hours, minutes and seconds
+  if (hours < 10) {
+      hours = "0" + hours;
+  }
+  if (minutes < 10) {
+      minutes = "0" + minutes;
+  }
+  if (seconds < 10) {
+      seconds = "0" + seconds;
+  }
+
+  // Gets the element we want to inject the clock into
+  var elem = document.getElementById('clock');
+
+  // Sets the elements inner HTML value to our clock data
+  elem.innerHTML = hours + ':' + minutes + ':' + seconds;
+
+}
+setInterval('updateClock()', 500);
+
+//
+//
+//
 timeAgo = function(dateString) {
     if (!dateString) {
       return "";
@@ -182,7 +216,7 @@ function fetchAllFeeds() {
 
   var MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
   fetchFeed(MAKO, "ערןץ 2");
-  
+
   var WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
   fetchFeed(WALLA, "Walla");
   
@@ -193,36 +227,37 @@ function fetchAllFeeds() {
 // First fetch of all the feeds to the page
 fetchAllFeeds();
 // fetch new data every 60sec
-setInterval(fetchAllFeeds, 60000);
+var fetchLoopInterval = setInterval(fetchAllFeeds, 60000);
+
 
 //
-// little clock
+// Start the party
 //
-function updateClock() {
-  // Gets the current time
-  var now = new Date();
+$(function() {
+  $("#save-seconds").click(function() {
+    // save the new update interval
+    clearInterval(fetchLoopInterval);
+    var seconds = 1000 * $("#update-seconds").val();
+    localStorage.setItem("alerts-il-seconds", seconds); 
+    fetchLoopInterval = setInterval(fetchAllFeeds, seconds);
+    console.log("Change the updater to: " + seconds + " sec");
 
-  // Get the hours, minutes and seconds from the current time
-  var hours = now.getHours();
-  var minutes = now.getMinutes();
-  var seconds = now.getSeconds();
+    $("#tab-1").click();
+  });
 
-  // Format hours, minutes and seconds
-  if (hours < 10) {
-      hours = "0" + hours;
+  var seconds = window.localStorage["alerts-il-seconds"];
+  if (!seconds) {
+    seconds = "60000";
+    console.log("don't have default settings so set update interval to 60sec");
   }
-  if (minutes < 10) {
-      minutes = "0" + minutes;
+  else {
+    console.log("Got settings to update interval: " + seconds + " sec");
   }
-  if (seconds < 10) {
-      seconds = "0" + seconds;
-  }
+  $("#update-seconds").val(seconds / 1000);
 
-  // Gets the element we want to inject the clock into
-  var elem = document.getElementById('clock');
 
-  // Sets the elements inner HTML value to our clock data
-  elem.innerHTML = hours + ':' + minutes + ':' + seconds;
+  $("#cancel-but").click(function() {
+    $("#tab-1").click();
+  });
 
-}
-setInterval('updateClock()', 500);
+});
