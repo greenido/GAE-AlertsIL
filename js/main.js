@@ -141,9 +141,7 @@ function pad(str, len, pad, dir) {
             break;
 
         } // switch
-
     }
-
     return str;
 
 }
@@ -254,7 +252,6 @@ $(function() {
     console.log("Got settings to update interval: " + seconds + " sec");
   }
   $("#update-seconds").val(seconds / 1000);
-
 
   $("#cancel-but").click(function() {
     $("#tab-1").click();
