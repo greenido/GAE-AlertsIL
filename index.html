@@ -4,19 +4,21 @@
     <meta charset="utf-8" />
     <meta name="author" content="Ido Green | greenido.wordpress.com | @greenido">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#db5945">
+    <link rel="icon" sizes="114x114" href="apple-touch-icon-114x114-precomposed.png">
+    
     <title>Alerts IL</title>
     <link rel="stylesheet" href="css/foundation.css" />
     <style>
       li.tab-title {
         width: 10em;
       }
-
       span.smallfont {
-        font-size: 80%;
-        padding: 0.4em;
-        border-radius: 30%;
+        font-size: 70%; 
       }
-
+      .tinytitle {
+        font-size: 90%;
+      }
       span#clock {
         padding-right: 1em;
         padding-left: 1em;
@@ -35,21 +37,17 @@
   <body>
     <div class="fixed contain-to-grid">
       <nav class="top-bar" data-topbar data-options="sticky_on: large">
-      
-
         <ul class="title-area">
           <li class="name">
             <h1><a href="#">Alerts IL | התראות ומבזקים בישראל</a>
             </h1>
           </li>
         </ul>
-
       </nav>
     </div>
 
     <div class="off-canvas-wrap" data-offcanvas>
       <div class="inner-wrap">
-
         <div class="row">
           <div class="large-12 columns">
             <a class="right-off-canvas-toggle button" href="#" >תפריט</a>
@@ -63,7 +61,7 @@
                   <br>
                   <a href="https://plus.google.com/+GreenIdo" title="להערות והצעות" target="_blank"> +GreenIdo</a>
                   <br>
-                  <small>Version 0.9.3</small>
+                  <small>Version 0.9.5</small>
                 </p>
                 <a class="close-reveal-modal">&#215;</a>
               </div>
@@ -75,12 +73,13 @@
           <div class="row">
             <div class="large-12 columns">
               <ul class="tabs" data-tab>
-                <li class="tab-title active"><a href="#panel2-1">חדשות</a></li>
+                <li class="tab-title active"><a id="tab-1" href="#panel2-1">חדשות</a></li>
                 <li class="tab-title"><a href="#panel2-2">טוויטר</a></li>
                 <li class="tab-title"><a href="#panel2-3">ערוץ 10</a></li>
                 <li class="tab-title"><a href="#panel2-6">ערוץ 2</a></li>
                 <li class="tab-title"><a href="#panel2-4">ynet</a></li>
                 <li class="tab-title"><a href="#panel2-5">צבע אדום</a></li> 
+                <li class="tab-title"><a href="#settings-panel">הגדרות</a></li> 
               </ul>
             </div>
           </div>
@@ -104,7 +103,6 @@
 
               <a class="twitter-timeline" href="https://twitter.com/greenido/lists/zalerts-il" data-widget-id="490783453143511041">Tweets from https://twitter.com/greenido/lists/zalerts-il</a>
               <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-
 
           </div>
         </div>
@@ -146,16 +144,40 @@
               <div class="large-12 columns callout panel" id="c-mako"></div>
           </div>
         </div>
+      </div>      
+
+      <div class="content" id="settings-panel" >
+        <div class="row">
+          <div class="large-12 callout panel columns">
+              <h2>הגדרות</h2>
+              <form>
+                <fieldset>
+                  <!-- <legend>התאמות אישיות</legend> -->
+                  <div class="large-2 small-6 columns">
+                    <label>עדכן כל מספר שניות
+                      <input id="update-seconds" type="text" placeholder="60 שניות לשיגרה או 10 שניות למצב חירום...">
+                    </label>
+                  </div>
+                </fieldset>
+                <ul class="button-group round">
+                  <li><a href="#" id="save-seconds" class="button alert">שמור</a></li>
+                  <li></li>
+                  <li><a href="#" id="cancel-but" class="button">בטל</a></li>
+                </ul>
+              </form>
+
+          </div>
+        </div>
       </div>
-      
+
     </div>
 
-      <div id="alert-dialog" class="reveal-modal" data-reveal>
+
+    <div id="alert-dialog" class="reveal-modal" data-reveal>
         <h2>אזעקת צבע אדום</h2>
         <div id="alerts-now"></div>
-        
         <a class="close-reveal-modal">&#215;</a>
-      </div>
+    </div>
 
     <hr />
     
@@ -180,10 +202,10 @@
       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
       ga('create', 'UA-53348325-1', 'auto');
+      ga('require', 'displayfeatures');
       ga('send', 'pageview');
 
     </script>
-
 
   </body>
 </html>

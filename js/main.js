@@ -10,6 +10,40 @@
 $(document).foundation();
 
 //
+// little clock
+//
+function updateClock() {
+  // Gets the current time
+  var now = new Date();
+
+  // Get the hours, minutes and seconds from the current time
+  var hours = now.getHours();
+  var minutes = now.getMinutes();
+  var seconds = now.getSeconds();
+
+  // Format hours, minutes and seconds
+  if (hours < 10) {
+      hours = "0" + hours;
+  }
+  if (minutes < 10) {
+      minutes = "0" + minutes;
+  }
+  if (seconds < 10) {
+      seconds = "0" + seconds;
+  }
+
+  // Gets the element we want to inject the clock into
+  var elem = document.getElementById('clock');
+
+  // Sets the elements inner HTML value to our clock data
+  elem.innerHTML = hours + ':' + minutes + ':' + seconds;
+
+}
+setInterval('updateClock()', 500);
+
+//
+//
+//
 timeAgo = function(dateString) {
     if (!dateString) {
       return "";
@@ -74,6 +108,45 @@ timeAgo = function(dateString) {
     }
   };
 
+
+//
+// Helper function for padding of the news/alerts
+//
+var STR_PAD_LEFT = 1;
+var STR_PAD_RIGHT = 2;
+var STR_PAD_BOTH = 3;
+
+function pad(str, len, pad, dir) {
+
+    if (typeof(len) == "undefined") { var len = 0; }
+    if (typeof(pad) == "undefined") { var pad = ' '; }
+    if (typeof(dir) == "undefined") { var dir = STR_PAD_RIGHT; }
+
+    if (len + 1 >= str.length) {
+
+        switch (dir){
+
+            case STR_PAD_LEFT:
+                str = Array(len + 1 - str.length).join(pad) + str;
+            break;
+
+            case STR_PAD_BOTH:
+                var right = Math.ceil((padlen = len - str.length) / 2);
+                var left = padlen - right;
+                str = Array(left+1).join(pad) + str + Array(right+1).join(pad);
+            break;
+
+            default:
+                str = str + Array(len + 1 - str.length).join(pad);
+            break;
+
+        } // switch
+    }
+    return str;
+
+}
+//
+//
 //
 function fetchFeed(curFeed, curSource) {
   $.ajax({
@@ -82,7 +155,6 @@ function fetchFeed(curFeed, curSource) {
   success  : function (data) {
     // check if we got something to work on.
     if (data && data.responseData.feed && data.responseData.feed.entries) {
-      
       //console.log("===== " + curFeed + " ====");
       var curIndex = 1;
       var mainList = '';
@@ -95,24 +167,16 @@ function fetchFeed(curFeed, curSource) {
           }
         }
         when += " (" + curSource + ")";
-        // console.log("-----------" + when + "-------------");
-        // console.log("title      : " + entry.title);
-        var buttonHTML = '<div class="row">' + 
-          '<div class="large-8 columns">' + entry.title + '</div>' +
-          '<div class="small-8 small-centered columns round secondary"><span class="smallfont">' + when +
-          '</span></div></div>';
-          
-        // if ((curIndex % 2) === 0) {
-        //   mainList += '<div class="row">'; 
-        // }
+        // console.log("-*-" + when + "-*-");
         
-        mainList +=  '<div class="large-10 columns"><a href="' + 
-                      entry.link + '" target="_blank" class="medium round button">' + 
+        var buttonHTML = //'<div class="row">' + 
+          '<span class="tinytitle">' + entry.title + '</span><br>' +
+          //'<div class="small-8 small-centered columns round secondary">'
+          '<span class="smallfont">' + when +
+          '</span>'; //</div>';
+        mainList +=  '<div class="large-4 medium-4 small-8 columns ourbut"><a href="' + 
+                      entry.link + '" target="_blank" class="button round">' + 
                       buttonHTML + '</a></div>';
-        // if (curIndex %2 === 0) {
-        //   mainList += "</div>";  
-        // }
-
         curIndex++;
       });
 
@@ -141,11 +205,6 @@ function fetchFeed(curFeed, curSource) {
 function fetchAllFeeds() {
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
   $('#mainlist10').html("<p><img src='img/ajax-loader.gif' /></p>");
-  var WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
-  fetchFeed(WALLA, "Walla");
-  
-  var GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
-  fetchFeed(GLZ, "Glz");
   
   var C10TV = "http://rss.nana10.co.il/?s=126";
   fetchFeed(C10TV, "ערוץ 10");
@@ -155,41 +214,47 @@ function fetchAllFeeds() {
 
   var MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
   fetchFeed(MAKO, "ערןץ 2");
+
+  var WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
+  fetchFeed(WALLA, "Walla");
+  
+  var GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
+  fetchFeed(GLZ, "Glz");
 }
 
 // First fetch of all the feeds to the page
 fetchAllFeeds();
 // fetch new data every 60sec
-setInterval(fetchAllFeeds, 60000);
+var fetchLoopInterval = setInterval(fetchAllFeeds, 60000);
+
 
 //
-// little clock
+// Start the party
 //
-function updateClock() {
-  // Gets the current time
-  var now = new Date();
+$(function() {
+  $("#save-seconds").click(function() {
+    // save the new update interval
+    clearInterval(fetchLoopInterval);
+    var seconds = 1000 * $("#update-seconds").val();
+    localStorage.setItem("alerts-il-seconds", seconds); 
+    fetchLoopInterval = setInterval(fetchAllFeeds, seconds);
+    console.log("Change the updater to: " + seconds + " sec");
 
-  // Get the hours, minutes and seconds from the current time
-  var hours = now.getHours();
-  var minutes = now.getMinutes();
-  var seconds = now.getSeconds();
+    $("#tab-1").click();
+  });
 
-  // Format hours, minutes and seconds
-  if (hours < 10) {
-      hours = "0" + hours;
+  var seconds = window.localStorage["alerts-il-seconds"];
+  if (!seconds) {
+    seconds = "60000";
+    console.log("don't have default settings so set update interval to 60sec");
   }
-  if (minutes < 10) {
-      minutes = "0" + minutes;
+  else {
+    console.log("Got settings to update interval: " + seconds + " sec");
   }
-  if (seconds < 10) {
-      seconds = "0" + seconds;
-  }
+  $("#update-seconds").val(seconds / 1000);
 
-  // Gets the element we want to inject the clock into
-  var elem = document.getElementById('clock');
+  $("#cancel-but").click(function() {
+    $("#tab-1").click();
+  });
 
-  // Sets the elements inner HTML value to our clock data
-  elem.innerHTML = hours + ':' + minutes + ':' + seconds;
-
-}
-setInterval('updateClock()', 500);
+});

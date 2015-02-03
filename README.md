@@ -34,6 +34,11 @@ Resources
 =========
 * Foundation CSS framework - It's a mobile first framework with a powerful grid system and much more.
 
+ToDos
+=====
+* RWD for desktop/mobile - change the number of alerts per row.
+* Allow customization of the news/alerts sources.
+
 Please feel free to fork or open issues.
 
 
