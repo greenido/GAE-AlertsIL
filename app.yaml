@@ -26,6 +26,7 @@ handlers:
 
 - url: /humans.txt
   script: humans.txt
+  
 - url: /robots.txt
   script: robots.txt
 
