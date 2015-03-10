@@ -150,7 +150,8 @@ function pad(str, len, pad, dir) {
 //
 function fetchFeed(curFeed, curSource) {
   $.ajax({
-  url : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' + encodeURIComponent(curFeed),
+  url : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' +
+        encodeURIComponent(curFeed),
   dataType : 'json',
   success  : function (data) {
     // check if we got something to work on.
@@ -169,13 +170,16 @@ function fetchFeed(curFeed, curSource) {
         when += " (" + curSource + ")";
         // console.log("-*-" + when + "-*-");
         
-        var buttonHTML = //'<div class="row">' + 
-          '<span class="tinytitle">' + entry.title + '</span><br>' +
-          //'<div class="small-8 small-centered columns round secondary">'
-          '<span class="smallfont">' + when +
-          '</span>'; //</div>';
-        mainList +=  '<div class="large-4 medium-4 small-8 columns ourbut"><a href="' + 
-                      entry.link + '" target="_blank" class="button round">' + 
+        var buttonHTML = '<span class="tinytitle">' + entry.title + '</span><br>' +
+          '<span class="smallfont">' + when + '</span>';
+        var newsItemStyle = "large-4 medium-4 small-8 columns";
+        var buttonStyle = "button round";
+        if (condLayout && condLayout === "true") {
+          newsItemStyle += " ourbut";
+          buttonStyle = "";
+        }  
+        mainList +=  '<div class="' + newsItemStyle + '"><a href="' + 
+                      entry.link + '" target="_blank" class="'+ buttonStyle + '">' + 
                       buttonHTML + '</a></div>';
         curIndex++;
       });
@@ -232,15 +236,26 @@ var fetchLoopInterval = setInterval(fetchAllFeeds, 60000);
 // Start the party
 //
 $(function() {
+
   $("#save-seconds").click(function() {
     // save the new update interval
     clearInterval(fetchLoopInterval);
     var seconds = 1000 * $("#update-seconds").val();
     localStorage.setItem("alerts-il-seconds", seconds); 
     fetchLoopInterval = setInterval(fetchAllFeeds, seconds);
-    console.log("Change the updater to: " + seconds + " sec");
 
-    $("#tab-1").click();
+    // condLayout is global!
+    condLayoutUI = $("#whichLayout").is(':checked');
+    localStorage.setItem("alerts-il-cond-layout", condLayoutUI); 
+    console.log("Change the updater to: " + seconds + " sec and condLayout: "+ condLayoutUI);
+    if (condLayout != condLayoutUI) {      
+      // There is a layout change - let's reload.
+      location.reload();
+    }
+    else {
+      // no need for refresh as we just returning with no layout changes
+      $("#tab-1").click();  
+    }
   });
 
   var seconds = window.localStorage["alerts-il-seconds"];
@@ -256,5 +271,16 @@ $(function() {
   $("#cancel-but").click(function() {
     $("#tab-1").click();
   });
+
+  condLayout = window.localStorage["alerts-il-cond-layout"];
+  if (condLayout && condLayout === "true") {
+    $("#whichLayout").attr('checked', true);
+    console.log ("setting crowded layout");
+  }
+  else {
+    $("#whichLayout").attr('checked', false); 
+    condLayout = false;
+    console.log ("setting wide layout");
+  }
 
 });

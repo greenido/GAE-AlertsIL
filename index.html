@@ -28,6 +28,11 @@
       .alerts-explanation {
         font-size: 0.7rem;
       }
+      .ourbut {
+        padding: 0.3em;
+        background: lightgreen;
+        border-radius: 10px
+      }
     </style>
 
     <script src="js/vendor/modernizr.js"></script>
@@ -61,7 +66,7 @@
                   <br>
                   <a href="https://plus.google.com/+GreenIdo" title="להערות והצעות" target="_blank"> +GreenIdo</a>
                   <br>
-                  <small>Version 0.9.5</small>
+                  <small>Version 0.9.6</small>
                 </p>
                 <a class="close-reveal-modal">&#215;</a>
               </div>
@@ -157,8 +162,16 @@
                     <label>עדכן כל מספר שניות
                       <input id="update-seconds" type="text" placeholder="60 שניות לשיגרה או 10 שניות למצב חירום...">
                     </label>
+
+                    <label>תצוגה מרוכזת</label>
+                    <div class="switch round large">
+                      <input id="whichLayout" type="checkbox" >
+                      <label for="whichLayout"></label>                      
+                    </div>
                   </div>
+
                 </fieldset>
+
                 <ul class="button-group round">
                   <li><a href="#" id="save-seconds" class="button alert">שמור</a></li>
                   <li></li>
