@@ -170,8 +170,8 @@ function fetchFeed(curFeed, curSource) {
         when += " (" + curSource + ")";
         // console.log("-*-" + when + "-*-");
         
-        var buttonHTML = '<span class="tinytitle">' + entry.title + '</span><br>' +
-          '<span class="smallfont">' + when + '</span>';
+        var buttonHTML = '<span class="tinytitle">' + entry.title + '</span>' +
+          '<span class="smallfont"> - ' + when + '</span>';
         var newsItemStyle = "large-4 medium-4 small-8 columns";
         var buttonStyle = "button round";
         if (condLayout && condLayout === "true") {
