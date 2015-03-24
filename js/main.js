@@ -228,7 +228,7 @@ function fetchAllFeeds() {
 
 // First fetch of all the feeds to the page
 fetchAllFeeds();
-// fetch new data every 60sec
+// fetch new data every 60sec - or any other interval that the user will choose later
 var fetchLoopInterval = setInterval(fetchAllFeeds, 60000);
 
 
