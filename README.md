@@ -2,19 +2,19 @@ AlertsIL
 ========
 
 AlertsIL is a mobile web app that give you all "Tezeva Adom" alerts in real time.
-It also combain all the main media sources (in hebrew) and fetch them to one location.
-It's a mobile first web app.
+It also contain the main media sources (in Hebrew) and fetch them to one location.
+It's a mobile first web application that should work great on any mobile device.
 
-* Live version: http://alerts-il.appspot.com/
-* Post: http://greenido.wordpress.com/2014/07/09/israels-alerts-mobile-web-app-example/
-
+* Live Version: http://alerts-il.appspot.com/
+* More details: http://greenido.wordpress.com/2014/07/09/israels-alerts-mobile-web-app-example/
 
 ![](http://greenido.files.wordpress.com/2014/07/screenshot-2014-07-09-16-28-35.png?w=247&h=300)
 
 Main Goal
 =========
-To built a mobile web app that give the user all the relevant information on EVERY mobile device.
-I hope we won't need to use it.
+A mobile web application that give the user all the relevant information on EVERY mobile device.
+I hope we won't need to use it. This app is fetching Tzeva-Adom alerts in real time (3sec intervals)
+and bring all the main news feed from Israel.
 
 Objectives
 ==========
