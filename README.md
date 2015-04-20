@@ -39,6 +39,6 @@ ToDos
 * RWD for desktop/mobile - change the number of alerts per row.
 * Allow customization of the news/alerts sources.
 
-Please feel free to fork or open issues.
+(!) Please feel free to fork or open issues.
 
 
