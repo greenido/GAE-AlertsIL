@@ -30,12 +30,19 @@ Features
   * http://www.oref.org.il/WarningMessages/alerts.json
   * http://tzeva-adom.com/alerts.php?fmt=html&limit=2
 
+
 Resources
 =========
-* Foundation CSS framework - It's a mobile first framework with a powerful grid system and much more.
+* Foundation CSS framework.
+It's a mobile first framework with a powerful grid system and much more.
 
 ToDos
 =====
+###Server
+* Save the alerts/news in a cloud solution (firebase, Google CloudSQL)
+* Expose an API to query the news and graph trends.
+
+###Client
 * RWD for desktop/mobile - change the number of alerts per row.
 * Allow customization of the news/alerts sources.
 
