@@ -49,4 +49,6 @@ ToDos
 
 (!) Please feel free to fork or open issues.
 
+[![Analytics](https://ga-beacon.appspot.com/UA-65622529-1/AGE-AlertIL/main)](https://github.com/igrigorik/ga-beacon)
+
 
