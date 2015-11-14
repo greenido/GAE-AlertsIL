@@ -43,7 +43,9 @@ function fetchPikodAlerts(){
   // Thanks to these 'apis':
   // http://www.oref.org.il/WarningMessages/alerts.json
   // http://tzeva-adom.com/alerts.php?fmt=html&limit=2
-  $.getJSON('proxy.php?url=http://tzeva-adom.com/alerts.php?limit=3', function(data) {
+  //
+  // https://github.com/gadicc/redalert/tree/master/api
+  $.getJSON('proxy.php?url=http://api1.tzeva-adom.com/redalert?limit=5', function(data) {
     //console.log("====================");  console.dir(data);
     
   var items = [];

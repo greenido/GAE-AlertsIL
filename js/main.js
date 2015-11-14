@@ -178,12 +178,18 @@ function fetchFeed(curFeed, curSource) {
           newsItemStyle += " ourbut";
           buttonStyle = "";
         }  
-        mainList +=  '<div class="' + newsItemStyle + '"><a href="' + 
+        var divDirection = '<div class="';
+        if (curSource.indexOf("Yahoo") > -1 ) {
+          divDirection = '<div dir="ltr" class="';
+        }
+        mainList +=  divDirection + newsItemStyle + '"><a href="' + 
                       entry.link + '" target="_blank" class="'+ buttonStyle + '">' + 
                       buttonHTML + '</a></div>';
         curIndex++;
       });
 
+      console.log("curS: " + curSource);
+      
       if (curSource.indexOf("Walla") > -1) {
         $('#mainlist').html("");
       }
@@ -197,7 +203,10 @@ function fetchFeed(curFeed, curSource) {
       }
       if (curSource.indexOf("2") > -1) {
         $('#c-mako').html(mainList);
-      }
+      }  
+      if (curSource.indexOf("Yahoo") > -1) {
+        $('#yahoo').html(mainList);
+      }  
     }
   }
 });
@@ -208,8 +217,10 @@ function fetchFeed(curFeed, curSource) {
 //
 function fetchAllFeeds() {
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
-  $('#mainlist10').html("<p><img src='img/ajax-loader.gif' /></p>");
-  
+
+  var WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
+  fetchFeed(WALLA, "Walla");
+
   var C10TV = "http://rss.nana10.co.il/?s=126";
   fetchFeed(C10TV, "ערוץ 10");
 
@@ -219,24 +230,25 @@ function fetchAllFeeds() {
   var MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
   fetchFeed(MAKO, "ערןץ 2");
 
-  var WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
-  fetchFeed(WALLA, "Walla");
-  
   var GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
   fetchFeed(GLZ, "Glz");
+
+  var yahoo = "http://news.yahoo.com/rss/";
+  fetchFeed(yahoo, "Yahoo");  
+
 }
 
-// First fetch of all the feeds to the page
-fetchAllFeeds();
-// fetch new data every 60sec - or any other interval that the user will choose later
-var fetchLoopInterval = setInterval(fetchAllFeeds, 60000);
 
+  // First fetch of all the feeds to the page
+  fetchAllFeeds();
+  // fetch new data every 60sec - or any other interval that the user will choose later
+  var fetchLoopInterval = setInterval(fetchAllFeeds, 60000);
 
 //
 // Start the party
 //
 $(function() {
-
+  
   $("#save-seconds").click(function() {
     // save the new update interval
     clearInterval(fetchLoopInterval);
@@ -258,6 +270,7 @@ $(function() {
     }
   });
 
+
   var seconds = window.localStorage["alerts-il-seconds"];
   if (!seconds) {
     seconds = "60000";
@@ -271,6 +284,7 @@ $(function() {
   $("#cancel-but").click(function() {
     $("#tab-1").click();
   });
+
 
   condLayout = window.localStorage["alerts-il-cond-layout"];
   if (condLayout && condLayout === "true") {
