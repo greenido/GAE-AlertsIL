@@ -41,6 +41,7 @@ ToDos
 ###Server
 * Save the alerts/news in a cloud solution (firebase, Google CloudSQL)
 * Expose an API to query the news and graph trends.
+* Check a better deployment than: appcfg.py -A alerts-il update app.yaml --noauth_local_webserver
 
 ###Client
 * RWD for desktop/mobile - change the number of alerts per row.
