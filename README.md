@@ -44,9 +44,8 @@ ToDos
 * Check a better deployment than: appcfg.py -A alerts-il update app.yaml --noauth_local_webserver
 
 ###Client
-* RWD for desktop/mobile - change the number of alerts per row.
 * Allow customization of the news/alerts sources.
-
+* Add service worker support + push notifications.
 
 (!) Please feel free to fork or open issues.
 
