@@ -146,20 +146,20 @@ function pad(str, len, pad, dir) {
 
 }
 //
-//
+// Fetching feeds by using YQL (used to be pipes.yahoo.com baby!)
 //
 function fetchFeed(curFeed, curSource) {
   $.ajax({
-  url : document.location.protocol + '//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=10&callback=?&q=' +
-        encodeURIComponent(curFeed),
+  url : 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20feed%20where%20url%3D%22' + 
+        encodeURIComponent(curFeed) + '%22&format=json&diagnostics=true&callback=',
   dataType : 'json',
   success  : function (data) {
     // check if we got something to work on.
-    if (data && data.responseData.feed && data.responseData.feed.entries) {
+    if (data && data.query.results && data.query.results.item) {
       //console.log("===== " + curFeed + " ====");
       var curIndex = 1;
       var mainList = '';
-      $.each(data.responseData.feed.entries, function (i, entry) {
+      $.each(data.query.results.item, function (i, entry) {
         var when = timeAgo(entry.publishedDate);
         if (when === "NaN" || when === undefined || when === null || when === "") {
           when = timeAgo(entry.pubDate);
@@ -175,7 +175,19 @@ function fetchFeed(curFeed, curSource) {
         var newsItemStyle = "large-4 medium-4 small-8 columns";
         var buttonStyle = "button round";
         if (condLayout && condLayout === "true") {
-          newsItemStyle += " ourbut";
+          newsItemStyle += " ourbut ";
+          if (curSource.indexOf("Walla") > -1) {
+            newsItemStyle += " walla-color ";
+          } 
+          else if (curSource.indexOf("Yahoo") > -1) {
+            newsItemStyle += " y-color ";
+          } 
+          else if (curSource.indexOf("Ynet") > -1) {
+            newsItemStyle += " ynet-color ";
+          }
+          else if (curSource.indexOf("2") > -1) {
+           newsItemStyle += " ch2-color "; 
+          } 
           buttonStyle = "";
         }  
         var divDirection = '<div class="';
