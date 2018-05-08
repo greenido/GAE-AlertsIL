@@ -201,7 +201,7 @@ function fetchFeed(curFeed, curSource) {
       });
 
       console.log("curS: " + curSource);
-      
+      $("#spinner").hide();
       if (curSource.indexOf("Walla") > -1) {
         $('#mainlist').html("");
       }
@@ -229,7 +229,7 @@ function fetchFeed(curFeed, curSource) {
 //
 function fetchAllFeeds() {
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
-
+  $("#spinner").show();
   var WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
   fetchFeed(WALLA, "Walla");
 
@@ -308,5 +308,4 @@ $(function() {
     condLayout = false;
     console.log ("setting wide layout");
   }
-
 });
