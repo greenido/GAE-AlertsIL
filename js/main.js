@@ -300,12 +300,12 @@ $(function() {
   });
 
   condLayout = window.localStorage["alerts-il-cond-layout"];
-  // if (!condLayout || condLayout == undefined) {
-  //   condLayout = true;
-  //   $("#whichLayout").attr('checked', true);
-  //   localStorage.setItem("alerts-il-cond-layout", true); 
-  //   console.log ("setting initial layout as crowded");
-  // }
+  if (!condLayout || condLayout == "undefined") {
+    condLayout = true;
+    $("#whichLayout").attr('checked', true);
+    localStorage.setItem("alerts-il-cond-layout", true); 
+    console.log ("setting initial layout as crowded");
+  }
 
   if (condLayout && condLayout === "true") {
     $("#whichLayout").attr('checked', true);
