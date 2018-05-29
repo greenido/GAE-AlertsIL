@@ -9,10 +9,16 @@
 // 
 function getUrl($url) {
   //error_log("Fetch:" . $url);
+  
+  // PROD
   $handle = fopen($url, "rb");
   $ret = stream_get_contents($handle);
   fclose($handle);
+
   //error_log("ret:\n $ret \n");
+  // TESTING: '{"id":"1527628240688","title":"התרעות פיקוד העורף ","data":["מרכז הנגב, עוטף עזה 234"]}';  
+  //$ret = '{"id":"' . time() . '","title":"התרעות פיקוד העורף ","data":["מרכז הנגב, עוטף עזה 234"]}';  
+  
   echo $ret;
 }
 

@@ -41,27 +41,32 @@ function returnToNormal() {
 //
 function fetchPikodAlerts(){
   // Thanks to these 'apis':
-  // http://www.oref.org.il/WarningMessages/alerts.json
-  // http://tzeva-adom.com/alerts.php?fmt=html&limit=2
+  // http://www.oref.org.il/WarningMessages/Alert/alerts.json?v=1
+  // http://tzeva-adom.com/alerts.php?fmt=html&limit=2 -- not working any more (5/2018)
   //
   // https://github.com/gadicc/redalert/tree/master/api
-  $.getJSON('proxy.php?url=http://api1.tzeva-adom.com/redalert?limit=5', function(data) {
-    //console.log("====================");  console.dir(data);
-    
-  var items = [];
-  var first = true;
-  var gotNewData = false;
-  $.each(data, function(item, i) {
-    if (first) {
-      var lastAlertTime = localStorage.getItem("last_alert");
-      if (i.time > lastAlertTime) {
-        // we have a new alert!
-        gotNewData = true;
-      }
-      localStorage.setItem("last_alert", i.time);
-      first = false;
+  
+  //
+  $.getJSON('proxy.php?url=http://www.oref.org.il/WarningMessages/Alert/alerts.json?v=1', function(data) {
+  console.log("== response from oref api v1: " + JSON.stringify(data) );   //console.dir(data);
+  let items = [];
+  let first = true;
+  let gotNewData = false;
+  let lastAlertTime = localStorage.getItem("last_alert");
+  
+  //
+  $.each(data, function(key, val) {  
+    if (typeof lastAlertTime == 'undefined' || (key == "id" &&  val > lastAlertTime) ) {
+      // we have a new alert!
+      gotNewData = true;
+      localStorage.setItem("last_alert", val);
     }
-    items.push('<li id="' + i.alert_id + '">' + i.area_name + ' - ' + unixTimeToReadable(i.time) + '</li>');
+  
+    if (key == "data") {
+      val.forEach(element => {
+        items.push('<li id="' + key + '">' + element + ' - ' + unixTimeToReadable(Date.now() ) + '</li>');  
+      });    
+    }
   });
 
   if (gotNewData) {
