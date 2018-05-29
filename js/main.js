@@ -14,12 +14,12 @@ $(document).foundation();
 //
 function updateClock() {
   // Gets the current time
-  var now = new Date();
+  let now = new Date();
 
   // Get the hours, minutes and seconds from the current time
-  var hours = now.getHours();
-  var minutes = now.getMinutes();
-  var seconds = now.getSeconds();
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let seconds = now.getSeconds();
 
   // Format hours, minutes and seconds
   if (hours < 10) {
@@ -33,7 +33,7 @@ function updateClock() {
   }
 
   // Gets the element we want to inject the clock into
-  var elem = document.getElementById('clock');
+  let elem = document.getElementById('clock');
 
   // Sets the elements inner HTML value to our clock data
   elem.innerHTML = hours + ':' + minutes + ':' + seconds;
@@ -57,7 +57,7 @@ timeAgo = function(dateString) {
     }
     
     
-    var rightNow = new Date(),
+    let rightNow = new Date(),
       then = new Date(dateString),
       diff = rightNow - then,
       second = 1000,
@@ -112,15 +112,15 @@ timeAgo = function(dateString) {
 //
 // Helper function for padding of the news/alerts
 //
-var STR_PAD_LEFT = 1;
-var STR_PAD_RIGHT = 2;
-var STR_PAD_BOTH = 3;
+let STR_PAD_LEFT = 1;
+let STR_PAD_RIGHT = 2;
+let STR_PAD_BOTH = 3;
 
 function pad(str, len, pad, dir) {
 
-    if (typeof(len) == "undefined") { var len = 0; }
-    if (typeof(pad) == "undefined") { var pad = ' '; }
-    if (typeof(dir) == "undefined") { var dir = STR_PAD_RIGHT; }
+    if (typeof(len) == "undefined") { let len = 0; }
+    if (typeof(pad) == "undefined") { let pad = ' '; }
+    if (typeof(dir) == "undefined") { let dir = STR_PAD_RIGHT; }
 
     if (len + 1 >= str.length) {
 
@@ -131,8 +131,8 @@ function pad(str, len, pad, dir) {
             break;
 
             case STR_PAD_BOTH:
-                var right = Math.ceil((padlen = len - str.length) / 2);
-                var left = padlen - right;
+                let right = Math.ceil((padlen = len - str.length) / 2);
+                let left = padlen - right;
                 str = Array(left+1).join(pad) + str + Array(right+1).join(pad);
             break;
 
@@ -157,10 +157,10 @@ function fetchFeed(curFeed, curSource) {
     // check if we got something to work on.
     if (data && data.query.results && data.query.results.item) {
       //console.log("===== " + curFeed + " ====");
-      var curIndex = 1;
-      var mainList = '';
+      let curIndex = 1;
+      let mainList = '';
       $.each(data.query.results.item, function (i, entry) {
-        var when = timeAgo(entry.publishedDate);
+        let when = timeAgo(entry.publishedDate);
         if (when === "NaN" || when === undefined || when === null || when === "") {
           when = timeAgo(entry.pubDate);
           if (when === "NaN" || when === undefined || when === null || when === "") {
@@ -170,10 +170,10 @@ function fetchFeed(curFeed, curSource) {
         when += " (" + curSource + ")";
         // console.log("-*-" + when + "-*-");
         
-        var buttonHTML = '<span class="tinytitle">' + entry.title + '</span>' +
+        let buttonHTML = '<span class="tinytitle">' + entry.title + '</span>' +
           '<span class="smallfont"> - ' + when + '</span>';
-        var newsItemStyle = "large-4 medium-4 small-8 columns";
-        var buttonStyle = "button round";
+        let newsItemStyle = "large-4 medium-4 small-8 columns";
+        let buttonStyle = "button round";
         if (condLayout && condLayout === "true") {
           newsItemStyle += " ourbut ";
           if (curSource.indexOf("Walla") > -1) {
@@ -190,7 +190,7 @@ function fetchFeed(curFeed, curSource) {
           } 
           buttonStyle = "";
         }  
-        var divDirection = '<div class="';
+        let divDirection = '<div class="';
         if (curSource.indexOf("Yahoo") > -1 ) {
           divDirection = '<div dir="ltr" class="';
         }
@@ -230,22 +230,22 @@ function fetchFeed(curFeed, curSource) {
 function fetchAllFeeds() {
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
   $("#spinner").show();
-  var WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
+  let WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
   fetchFeed(WALLA, "Walla");
 
-  var C10TV = "http://rss.nana10.co.il/?s=126";
+  let C10TV = "http://rss.nana10.co.il/?s=126";
   fetchFeed(C10TV, "ערוץ 10");
 
-  var YNET = 'http://www.ynet.co.il/Integration/StoryRss1854.xml';
+  let YNET = 'http://www.ynet.co.il/Integration/StoryRss1854.xml';
   fetchFeed(YNET, "Ynet");
 
-  var MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
+  let MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
   fetchFeed(MAKO, "ערןץ 2");
 
-  var GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
+  let GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
   fetchFeed(GLZ, "Glz");
 
-  var yahoo = "http://news.yahoo.com/rss/";
+  let yahoo = "http://news.yahoo.com/rss/";
   fetchFeed(yahoo, "Yahoo");  
 
 }
@@ -254,7 +254,7 @@ function fetchAllFeeds() {
   // First fetch of all the feeds to the page
   fetchAllFeeds();
   // fetch new data every 60sec - or any other interval that the user will choose later
-  var fetchLoopInterval = setInterval(fetchAllFeeds, 60000);
+  let fetchLoopInterval = setInterval(fetchAllFeeds, 60000);
 
 //
 // Start the party
@@ -267,7 +267,7 @@ $(function() {
   $("#save-seconds").click(function() {
     // save the new update interval
     clearInterval(fetchLoopInterval);
-    var seconds = 1000 * $("#update-seconds").val();
+    let seconds = 1000 * $("#update-seconds").val();
     localStorage.setItem("alerts-il-seconds", seconds); 
     fetchLoopInterval = setInterval(fetchAllFeeds, seconds);
 
@@ -285,7 +285,7 @@ $(function() {
     }
   });
 
-  var seconds = window.localStorage["alerts-il-seconds"];
+  let seconds = window.localStorage["alerts-il-seconds"];
   if (!seconds) {
     seconds = "60000";
     console.log("don't have default settings so set update interval to 60sec");
