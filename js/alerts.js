@@ -7,7 +7,7 @@
 //
 
 function unixTimeToReadable(unix_timestamp) {
-  let date = new Date(unix_timestamp * 1000);
+  let date = new Date(unix_timestamp);
   
   let hours = date.getHours();
   let minutes = date.getMinutes();
@@ -80,10 +80,12 @@ function fetchPikodAlerts(){
       let body = items.join(' \n ');
       let textResult = body.replace(regex, "");
       //console.log("text: "+ textResult);
+      ga('send', 'event', 'Alerts', textResult, items.join(', '));
       let adomNotification = new Notification('צבע אדום', {
         body:  textResult,
         icon: "/img/alert.jpeg"
       });
+      
       // Should we close it automatically? not clear from UX point of view.
       // adomNotification.onshow = function () { 
       //   setTimeout(adomNotification.close(), 5000); 
