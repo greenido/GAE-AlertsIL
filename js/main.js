@@ -168,9 +168,21 @@ function fetchFeed(curFeed, curSource) {
           }
         }
         when += " (" + curSource + ")";
-        // console.log("-*-" + when + "-*-");
-        
-        let buttonHTML = '<span class="tinytitle">' + entry.title + '</span>' +
+        console.log("-*-" + entry.image + "-*-");
+        let leadImg = ""
+        // For MAKO - channel 2
+        if (entry && entry.image) {
+          leadImg = "<img class='newsLeadImg' src='" + entry.image + "' alt='lead image'/>";
+        }
+        // For channel 10
+        if (entry.enclosure && entry.enclosure.url) {
+          leadImg = "<img class='newsLeadImg' src='" + entry.enclosure.url + "' alt='lead image'/>";
+        }
+        // For Yahoo
+        if (entry.content && entry.content.url) {
+          leadImg = "<img class='newsLeadImg' src='" + entry.content.url + "' alt='lead image'/>";
+        }
+        let buttonHTML = '<span class="tinytitle">' + leadImg + entry.title + '</span>' +
           '<span class="smallfont"> - ' + when + '</span>';
         let newsItemStyle = "large-4 medium-4 small-8 columns";
         let buttonStyle = "button round";
@@ -230,8 +242,6 @@ function fetchFeed(curFeed, curSource) {
 function fetchAllFeeds() {
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
   $("#spinner").show();
-  let WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
-  fetchFeed(WALLA, "Walla");
 
   let C10TV = "http://rss.nana10.co.il/?s=126";
   fetchFeed(C10TV, "ערוץ 10");
@@ -242,11 +252,14 @@ function fetchAllFeeds() {
   let MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
   fetchFeed(MAKO, "ערןץ 2");
 
+  let yahoo = "http://news.yahoo.com/rss/";
+  fetchFeed(yahoo, "Yahoo");  
+
   let GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
   fetchFeed(GLZ, "Glz");
 
-  let yahoo = "http://news.yahoo.com/rss/";
-  fetchFeed(yahoo, "Yahoo");  
+  let WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
+  fetchFeed(WALLA, "Walla");
 
 }
 
