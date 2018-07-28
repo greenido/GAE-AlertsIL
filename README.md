@@ -23,8 +23,7 @@ Objectives
 
 Features
 ========
-* Tweets
-  * refresh them every 60sec.
+* Tweets - Refresh them every 60sec.
 
 * APIs for Tzeva Adom alerts in real time
   * http://www.oref.org.il/WarningMessages/Alert/alerts.json?v=1
@@ -51,6 +50,6 @@ ToDos
 * Allow customization of the news/alerts sources.
 * Add service worker support + *push notifications*
 
-(!) Please feel free to fork and/or open issues.
+### 👉 Please feel free to fork and/or [open issues](https://github.com/greenido/GAE-AlertsIL/issues)
 
 [![Analytics](https://ga-beacon.appspot.com/UA-65622529-1/AGE-AlertIL/main)](https://github.com/igrigorik/ga-beacon)
