@@ -30,6 +30,12 @@ Features
   * http://www.oref.org.il/WarningMessages/Alert/alerts.json?v=1
   * (not working as of 11/2017) http://tzeva-adom.com/alerts.php?fmt=html&limit=2
 
+Deployment
+==========
+```bash
+gcloud app deploy app.yaml --project alerts-il
+```
+
 Resources
 =========
 * Foundation CSS framework.
@@ -38,16 +44,13 @@ It's a mobile first framework with a powerful grid system and much more.
 ToDos
 =====
 ### Server
-* Save the alerts/news in a cloud solution (firebase, Google CloudSQL)
+* Save the alerts/news in a cloud solution (e.g. AWS, Firebase, Google CloudSQL)
 * Expose an API to query the news and graph trends.
-* Check a better deployment than: appcfg.py -A alerts-il update app.yaml --noauth_local_webserver
 
 ### Client
 * Allow customization of the news/alerts sources.
-* Add service worker support + push notifications.
+* Add service worker support + *push notifications*
 
-(!) Please feel free to fork or open issues.
+(!) Please feel free to fork and/or open issues.
 
 [![Analytics](https://ga-beacon.appspot.com/UA-65622529-1/AGE-AlertIL/main)](https://github.com/igrigorik/ga-beacon)
-
-

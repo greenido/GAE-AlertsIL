@@ -6,4 +6,4 @@
 #    exit 1;
 #fi
 
-/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --new-window --window-position=10,10 --window-size=600,800 https://alerts-il.appspot.com/
+/Applications/Google\ Chrome.app/Contents/MacOS/Google\ Chrome --new-window --window-position=10,10 --window-size=600,800 https://alerts-il.appspot.com
