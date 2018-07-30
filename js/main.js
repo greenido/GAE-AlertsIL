@@ -151,7 +151,7 @@ function pad(str, len, pad, dir) {
 function fetchFeed(curFeed, curSource) {
   $.ajax({
   url : 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20feed%20where%20url%3D%22' + 
-        encodeURIComponent(curFeed) + '%22&format=json&diagnostics=true&callback=',
+        encodeURIComponent(curFeed) + '%22&format=json&diagnostics=false&callback=',
   dataType : 'json',
   success  : function (data) {
     // check if we got something to work on.
@@ -160,6 +160,8 @@ function fetchFeed(curFeed, curSource) {
       let curIndex = 1;
       let mainList = '';
       $.each(data.query.results.item, function (i, entry) {
+        if (i>9) return;
+
         let when = timeAgo(entry.publishedDate);
         if (when === "NaN" || when === undefined || when === null || when === "") {
           when = timeAgo(entry.pubDate);
@@ -168,7 +170,7 @@ function fetchFeed(curFeed, curSource) {
           }
         }
         when += " (" + curSource + ")";
-        console.log("-*-" + entry.image + "-*-");
+        //console.log("-*-" + entry.image + "-*-");
         let leadImg = ""
         // For MAKO - channel 2
         if (entry && entry.image) {
