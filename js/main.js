@@ -150,42 +150,29 @@ function pad(str, len, pad, dir) {
 //
 function fetchFeed(curFeed, curSource) {
   $.ajax({
-  url : 'https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20feed%20where%20url%3D%22' + 
-        encodeURIComponent(curFeed) + '%22&format=json&diagnostics=false&callback=',
-  dataType : 'json',
+  url : 'proxy.php?url=' + encodeURIComponent(curFeed),
   success  : function (data) {
     // check if we got something to work on.
-    if (data && data.query.results && data.query.results.item) {
+    if (data ) {
       //console.log("===== " + curFeed + " ====");
+      
       let curIndex = 1;
       let mainList = '';
-      $.each(data.query.results.item, function (i, entry) {
-        if (i>9) return;
+      $(data).find("item").each(function () { 
+          let el = $(this);
+          let entry = {
+            title: el.find("title").text(),
+            link: el.find("link").text(),
+            desc: el.find("description").text()
+          };
 
-        let when = timeAgo(entry.publishedDate);
-        if (when === "NaN" || when === undefined || when === null || when === "") {
-          when = timeAgo(entry.pubDate);
-          if (when === "NaN" || when === undefined || when === null || when === "") {
-            when = "";
-          }
-        }
-        when += " (" + curSource + ")";
+        let when = " (" + curSource + ")";
+        
         //console.log("-*-" + entry.image + "-*-");
-        let leadImg = ""
-        // For MAKO - channel 2
-        if (entry && entry.image) {
-          leadImg = "<img class='newsLeadImg' src='" + entry.image + "' alt='lead image'/>";
-        }
-        // For channel 10
-        if (entry.enclosure && entry.enclosure.url) {
-          leadImg = "<img class='newsLeadImg' src='" + entry.enclosure.url + "' alt='lead image'/>";
-        }
-        // For Yahoo
-        if (entry.content && entry.content.url) {
-          leadImg = "<img class='newsLeadImg' src='" + entry.content.url + "' alt='lead image'/>";
-        }
-        let buttonHTML = '<span class="tinytitle">' + leadImg + entry.title + '</span>' +
-          '<span class="smallfont"> - ' + when + '</span>';
+
+        let buttonHTML = '<span class="tinytitle">' + entry.title + '</span>' +
+          "<br> " + entry.desc + "<br>" +
+          '<span class="smallfont">' + when + '</span>';
         let newsItemStyle = "large-4 medium-4 small-8 columns";
         let buttonStyle = "button round";
         if (condLayout && condLayout === "true") {
@@ -244,6 +231,8 @@ function fetchFeed(curFeed, curSource) {
 function fetchAllFeeds() {
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
   $("#spinner").show();
+  let WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
+  fetchFeed(WALLA, "Walla");
 
   let C10TV = "http://rss.nana10.co.il/?s=126";
   fetchFeed(C10TV, "ערוץ 10");
@@ -254,22 +243,19 @@ function fetchAllFeeds() {
   let MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
   fetchFeed(MAKO, "ערןץ 2");
 
-  let yahoo = "http://news.yahoo.com/rss/";
-  fetchFeed(yahoo, "Yahoo");  
+  // let yahoo = "http://news.yahoo.com/rss/";
+  // fetchFeed(yahoo, "Yahoo");  
 
   let GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
   fetchFeed(GLZ, "Glz");
 
-  let WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
-  fetchFeed(WALLA, "Walla");
-
 }
 
 
-  // First fetch of all the feeds to the page
-  fetchAllFeeds();
-  // fetch new data every 60sec - or any other interval that the user will choose later
-  let fetchLoopInterval = setInterval(fetchAllFeeds, 60000);
+// First fetch of all the feeds to the page
+fetchAllFeeds();
+// fetch new data every 60sec - or any other interval that the user will choose later
+let fetchLoopInterval = setInterval(fetchAllFeeds, 90000);
 
 //
 // Start the party
