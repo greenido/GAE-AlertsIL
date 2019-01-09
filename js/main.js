@@ -246,8 +246,8 @@ function fetchAllFeeds() {
   // let yahoo = "http://news.yahoo.com/rss/";
   // fetchFeed(yahoo, "Yahoo");  
 
-  let GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
-  fetchFeed(GLZ, "Glz");
+  // let GLZ = "http://glz.co.il/1421-he/Galatz.aspx?id=12703";
+  // fetchFeed(GLZ, "Glz");
 
 }
 
