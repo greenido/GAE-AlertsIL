@@ -10,7 +10,7 @@ It's a mobile first web application that should work great on any mobile device.
 
 ![](http://greenido.files.wordpress.com/2014/07/screenshot-2014-07-09-16-28-35.png?w=247&h=300)
 
-Main Goal
+Goal
 =========
 A mobile web application that give the user all the relevant information on EVERY mobile device.
 I hope we won't need to use it. This app is fetching Tzeva-Adom alerts in real time (3sec intervals)
@@ -33,6 +33,8 @@ Deployment
 ==========
 ```bash
 gcloud app deploy app.yaml --project alerts-il
+
+php -S localhost:8000
 ```
 
 Resources
@@ -40,8 +42,8 @@ Resources
 * Foundation CSS framework.
 It's a mobile first framework with a powerful grid system and much more.
 
-ToDos
-=====
+Todo
+====
 ### Server
 * Save the alerts/news in a cloud solution (e.g. AWS, Firebase, Google CloudSQL)
 * Expose an API to query the news and graph trends.
