@@ -241,9 +241,7 @@ function getLinkFromBrokenHTML(htmlEl) {
 function fetchAllFeeds() {
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
   $("#spinner").show();
-  let WALLA = "http://rss.walla.co.il/feed/1?type=main";
-  fetchFeed(WALLA, "Walla");
-
+  
   let C10TV = "http://rss.nana10.co.il/?s=126";
   fetchFeed(C10TV, "ערוץ 10");
 
@@ -253,6 +251,9 @@ function fetchAllFeeds() {
   let MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
   fetchFeed(MAKO, "ערןץ 2");
 
+  let WALLA = "http://rss.walla.co.il/feed/1?type=main";
+  fetchFeed(WALLA, "Walla");
+  
   // let yahoo = "http://news.yahoo.com/rss/";
   // fetchFeed(yahoo, "Yahoo");  
 
