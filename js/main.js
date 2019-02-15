@@ -162,7 +162,7 @@ function fetchFeed(curFeed, curSource) {
           let el = $(this);
           let entry = {
             title: el.find("title").text(),
-            link: el.find("link").text(),
+            link: getLinkFromBrokenHTML(el[0].innerHTML), //el.find("link").text(),
             desc: el.find("description").text()
           };
 
@@ -228,10 +228,20 @@ function fetchFeed(curFeed, curSource) {
 //
 //
 //
+function getLinkFromBrokenHTML(htmlEl) {
+  let inx1 = htmlEl.indexOf("<link>") + 6;
+  let inx2 = htmlEl.indexOf("<", inx1);
+  let link = htmlEl.substring(inx1 , inx2);
+  return link;
+}
+
+//
+//
+//
 function fetchAllFeeds() {
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
   $("#spinner").show();
-  let WALLA = "http://rss.walla.co.il/?w=/1/22/0/@rss";
+  let WALLA = "http://rss.walla.co.il/feed/1?type=main";
   fetchFeed(WALLA, "Walla");
 
   let C10TV = "http://rss.nana10.co.il/?s=126";
