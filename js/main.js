@@ -242,8 +242,8 @@ function fetchAllFeeds() {
   $('#mainlist').html("<div id='spinner'><img src='img/ajax-loader.gif' /></div>");
   $("#spinner").show();
   
-  let C10TV = "http://rss.nana10.co.il/?s=126";
-  fetchFeed(C10TV, "ערוץ 10");
+  // let C10TV = "http://rss.nana10.co.il/?s=126";
+  // fetchFeed(C10TV, "ערוץ 10");
 
   let YNET = 'http://www.ynet.co.il/Integration/StoryRss1854.xml';
   fetchFeed(YNET, "Ynet");
