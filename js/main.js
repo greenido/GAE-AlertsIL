@@ -299,8 +299,8 @@ $(function() {
 
   let seconds = window.localStorage["alerts-il-seconds"];
   if (!seconds) {
-    seconds = "60000";
-    console.log("don't have default settings so set update interval to 60sec");
+    seconds = "120000";
+    console.log("don't have default settings so set update interval to 120sec");
   }
   else {
     console.log("Got settings to update interval: " + seconds + " sec");
@@ -317,6 +317,7 @@ $(function() {
     $("#whichLayout").attr('checked', true);
     localStorage.setItem("alerts-il-cond-layout", true); 
     console.log ("setting initial layout as crowded");
+    location.reload();
   }
 
   if (condLayout && condLayout === "true") {
