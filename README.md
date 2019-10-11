@@ -23,6 +23,17 @@ Objectives
 
 Features
 ========
+
+* Docker
+
+```
+> Build the image
+sudo docker build -t "php-gae-alertsil:v2" .
+
+> Run the image (make sure 9090 is open on the hosted VM as the container will pass port 80 to 9090)
+docker run -d -p9090:80 php-gae-alertsil:v2
+```
+
 * Tweets - Refresh them every 60sec.
 
 * APIs for Tzeva Adom alerts in real time
@@ -53,5 +64,3 @@ Todo
 * Add service worker support + *push notifications*
 
 ### 👉 Please feel free to fork and/or [open issues](https://github.com/greenido/GAE-AlertsIL/issues)
-
-[![Analytics](https://ga-beacon.appspot.com/UA-65622529-1/AGE-AlertIL/main)](https://github.com/igrigorik/ga-beacon)
