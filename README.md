@@ -32,6 +32,9 @@ sudo docker build -t "php-gae-alertsil:v2" .
 
 > Run the image (make sure 9090 is open on the hosted VM as the container will pass port 80 to 9090)
 docker run -d -p9090:80 php-gae-alertsil:v2
+
+> Delpoy it on your server
+docker pull greenido/gae-alerts-il
 ```
 
 * Tweets - Refresh them every 60sec.
