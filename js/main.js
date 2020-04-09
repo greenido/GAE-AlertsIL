@@ -265,8 +265,8 @@ function fetchAllFeeds() {
 
 // First fetch of all the feeds to the page
 fetchAllFeeds();
-// fetch new data every 60sec - or any other interval that the user will choose later
-let fetchLoopInterval = setInterval(fetchAllFeeds, 90000);
+// fetch new data every 10min (= 10*60*1000 = 600,000) 
+let fetchLoopInterval = setInterval(fetchAllFeeds, 600000);
 
 //
 // Start the party
@@ -299,8 +299,8 @@ $(function() {
 
   let seconds = window.localStorage["alerts-il-seconds"];
   if (!seconds) {
-    seconds = "120000";
-    console.log("don't have default settings so set update interval to 120sec");
+    seconds = "600000";
+    console.log("don't have default settings so set update interval to 600sec = 10min");
   }
   else {
     console.log("Got settings to update interval: " + seconds + " sec");
