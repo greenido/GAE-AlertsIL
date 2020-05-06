@@ -145,6 +145,17 @@ function pad(str, len, pad, dir) {
     return str;
 
 }
+
+//
+// Clean CDATA tags from the text
+//
+function removeCDateTags(str) {
+  str = str.replace("<![CDATA[", "");
+  str = str.replace("]]>", "");  
+  str = str.replace("<[[", "");
+  return str;
+}
+
 //
 // Fetching feeds by using YQL (used to be pipes.yahoo.com baby!)
 //
@@ -169,9 +180,10 @@ function fetchFeed(curFeed, curSource) {
         let when = " (" + curSource + ")";
         
         //console.log("-*-" + entry.image + "-*-");
-
-        let buttonHTML = '<span class="tinytitle">' + entry.title + '</span>' +
-          "<br> " + entry.desc + "<br>" +
+        let title = removeCDateTags(entry.title);
+        let desc = removeCDateTags(entry.desc);
+        let buttonHTML = '<span class="tinytitle">' + title + '</span>' +
+          "<br> " + desc + "<br>" +
           '<span class="smallfont">' + when + '</span>';
         let newsItemStyle = "large-4 medium-4 small-8 columns";
         let buttonStyle = "button round";
@@ -244,12 +256,11 @@ function fetchAllFeeds() {
   
   // let C10TV = "http://rss.nana10.co.il/?s=126";
   // fetchFeed(C10TV, "ערוץ 10");
-
-  let YNET = 'http://www.ynet.co.il/Integration/StoryRss1854.xml';
-  fetchFeed(YNET, "Ynet");
-
   let MAKO = 'http://rcs.mako.co.il/rss/news-israel.xml';
   fetchFeed(MAKO, "ערןץ 2");
+  
+  let YNET = 'http://www.ynet.co.il/Integration/StoryRss1854.xml';
+  fetchFeed(YNET, "Ynet");
 
   let WALLA = "http://rss.walla.co.il/feed/1?type=main";
   fetchFeed(WALLA, "Walla");
